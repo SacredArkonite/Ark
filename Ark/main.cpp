@@ -2,7 +2,7 @@
 
 void main()
 {
-	std::cout << "Hello Potato!" << std::endl;
+	std::cout << "test" << std::endl;
 
 	char t;
 
