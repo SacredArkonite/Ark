@@ -1,15 +1,11 @@
 #include <iostream>
 #include <fstream>
-#include "json_util.h"
-#include "jsoncpp\json\json.h"
 
-
+#include "compiler.h"
 void main()
 {
-	Json::Value root;
-	interpret("../test.json",root);
+	precompile("../test.json");
 
-	std::cout << root["value"].asFloat() << std::endl;
 
 	char t;
 	std::cin >> t;

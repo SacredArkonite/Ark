@@ -1,3 +1,159 @@
 {
-  "value": 3.2
+  "datas": [
+    {
+      "name": "const1",
+      "type": "constant",
+      "data": 2,
+      "inputs": [
+      ],
+      "outputs": [
+        {
+          "name": "out",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "const2",
+      "type": "constant",
+      "data": 3,
+      "inputs": [
+      ],
+      "outputs": [
+        {
+          "name": "out",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "const3",
+      "type": "constant",
+      "data": 4,
+      "inputs": [
+      ],
+      "outputs": [
+        {
+          "name": "out",
+          "type": "int"
+        }
+      ]
+    }
+  ],
+  "operations": [
+    {
+      "name": "add1",
+      "type": "adder",
+      "inputs": [
+        {
+          "name": "in1",
+          "type": "int"
+        },
+        {
+          "name": "in1",
+          "type": "int"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "out",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "mul1",
+      "type": "multiplier",
+      "inputs": [
+        {
+          "name": "in1",
+          "type": "int"
+        },
+        {
+          "name": "in1",
+          "type": "int"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "out",
+          "type": "int"
+        }
+      ]
+    },
+    {
+      "name": "prnt_wait",
+      "type": "print_and_wait",
+      "inputs": [
+        {
+          "name": "in",
+          "type": "int"
+        }
+      ],
+      "outputs": [
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "source": {
+        "block": "const2",
+        "port": "out"
+      },
+      "destinations": [
+        {
+          "block": "mul1",
+          "port": "in1"
+        }
+      ]
+    },
+    {
+      "source": {
+        "block": "const3",
+        "port": "out"
+      },
+      "destinations": [
+        {
+          "block": "mul1",
+          "port": "in2"
+        }
+      ]
+    },
+    {
+      "source": {
+        "block": "const1",
+        "port": "out"
+      },
+      "destinations": [
+        {
+          "block": "add1",
+          "port": "in1"
+        }
+      ]
+    },
+    {
+      "source": {
+        "block": "mul1",
+        "port": "out"
+      },
+      "destinations": [
+        {
+          "block": "add1",
+          "port": "in2"
+        }
+      ]
+    },
+    {
+      "source": {
+        "block": "add1",
+        "port": "out"
+      },
+      "destinations": [
+        {
+          "block": "prnt_wait",
+          "port": "in"
+        }
+      ]
+    }
+  ]
 }

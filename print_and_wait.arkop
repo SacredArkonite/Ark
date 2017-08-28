@@ -1,0 +1,4 @@
+#include <iostream>
+std::cout<<"Value:"<<in<<std::endl;
+char t;
+std::cin>>t;
