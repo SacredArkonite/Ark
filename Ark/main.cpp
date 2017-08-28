@@ -2,7 +2,7 @@
 
 void main()
 {
-	std::cout << "Hello Potato!" << std::endl;
+	std::cout << "Version 1 only!" << std::endl;
 
 	char t;
 
