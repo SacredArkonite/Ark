@@ -18,5 +18,16 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="jsoncpp\jsoncpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="jsoncpp\json\json.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json\json-forwards.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
