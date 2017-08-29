@@ -1,0 +1,3 @@
+[submodule "chili_framework"]
+	path = chili_framework
+	url = https://github.com/planetchili/chili_framework
