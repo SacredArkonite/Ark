@@ -7,10 +7,14 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ark", "Ark\Ark.vcxproj", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{311C73D9-A670-4DBA-8710-954E9C96E1EE}"
 	ProjectSection(SolutionItems) = preProject
+		ArkLib\Operation\adder.arkop = ArkLib\Operation\adder.arkop
+		ArkLib\Data\constant.arkdata = ArkLib\Data\constant.arkdata
+		ArkLib\Operation\multiplier.arkop = ArkLib\Operation\multiplier.arkop
+		ArkLib\Operation\print_and_wait.arkop = ArkLib\Operation\print_and_wait.arkop
 		test.json = test.json
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ark", "Ark", "{8F3059D1-DA98-4C50-B434-B527257B817C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArkLib", "ArkLib", "{8F3059D1-DA98-4C50-B434-B527257B817C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{BDC3795B-FC5D-4339-9BF3-27503E4885D6}"
 	ProjectSection(SolutionItems) = preProject

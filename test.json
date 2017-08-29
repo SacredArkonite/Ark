@@ -1,4 +1,5 @@
 {
+  "schema":  "test.arksch",
   "datas": [
     {
       "name": "const1",
@@ -42,8 +43,8 @@
   ],
   "operations": [
     {
-      "name": "add1",
-      "type": "adder",
+      "name": "mul1",
+      "type": "multiplier",
       "inputs": [
         {
           "name": "in1",
@@ -62,8 +63,8 @@
       ]
     },
     {
-      "name": "mul1",
-      "type": "multiplier",
+      "name": "add1",
+      "type": "adder",
       "inputs": [
         {
           "name": "in1",
