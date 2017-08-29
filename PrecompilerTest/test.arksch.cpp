@@ -2,9 +2,9 @@
 void main()
 {
 //DATA
-int const1_out;
-int const2_out;
-int const3_out;
+int const1_out = 2;
+int const2_out = 3;
+int const3_out = 4;
 //OPERATIONS
 
 //OPERAION: mul1
@@ -14,7 +14,7 @@ int mul1_out;
 {
 //INPUTS
 int in1;
-int in1;
+int in2;
 //SET INPUTS
 in1 = const2_out;
 in2 = const3_out;
@@ -29,7 +29,7 @@ int add1_out;
 {
 //INPUTS
 int in1;
-int in1;
+int in2;
 //SET INPUTS
 in1 = const1_out;
 in2 = mul1_out;

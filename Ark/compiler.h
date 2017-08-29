@@ -36,7 +36,7 @@ void precompile(std::string arkfile)
 		std::string dataname = node["name"].asString();
 		for each (Json::Value output in node["outputs"])
 		{
-			ss << datatype << " " << dataname << "_" << output["name"].asString() << ";" << std::endl;
+			ss << datatype << " " << dataname << "_" << output["name"].asString() << " = " << node["data"].asInt() << ";" << std::endl;
 
 		}
 		filereader.close();
@@ -113,7 +113,7 @@ void precompile(std::string arkfile)
 	ss << "return;" << std::endl << "}" << std::endl;
 
 	//Output the result to a file
-	std::ofstream filewriter(root["schema"].asString());
+	std::ofstream filewriter("../PrecompilerTest/" + root["schema"].asString() + ".cpp");
 	filewriter << ss.str();
 
 	return;

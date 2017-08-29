@@ -51,7 +51,7 @@
           "type": "int"
         },
         {
-          "name": "in1",
+          "name": "in2",
           "type": "int"
         }
       ],
@@ -71,7 +71,7 @@
           "type": "int"
         },
         {
-          "name": "in1",
+          "name": "in2",
           "type": "int"
         }
       ],
