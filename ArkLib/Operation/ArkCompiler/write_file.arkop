@@ -1,0 +1,24 @@
+{
+  "dependancies": [
+    { "c": "string" },
+    { "c": "fstream" },
+    { "c": "sstream" }
+  ],
+  "inputs": [
+    {
+      "type": "std::string",
+      "name": "filename"
+    },
+    {
+      "type": "std::stringstream&",
+      "name": "data"
+    }
+  ],
+  "outputs": [
+  ],
+  "instructions": [
+    { "op": "std::ofstream filewriter(\"../PrecompilerTest/\" + filename + \".cpp\");" },
+    { "op": "filewriter << data.str();" },
+    { "op": "filewriter.close();" }
+  ]
+}

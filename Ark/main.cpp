@@ -4,7 +4,7 @@
 #include "compiler.h"
 void main()
 {
-	precompile("../test.json");
+	precompile("../precompiler1.arksch");
 	char t;
 	std::cin >> t;
 

@@ -1,0 +1,36 @@
+{
+  "dependancies": [
+    { "c": "sstream" }
+  ],
+  "inputs": [
+    {
+      "type": "std::stringstream&",
+      "name": "ss_includes"
+    },
+    {
+      "type": "std::stringstream&",
+      "name": "ss_datas"
+    },
+    {
+      "type": "std::stringstream&",
+      "name": "ss_outputs"
+    },
+    {
+      "type": "std::stringstream&",
+      "name": "ss_lambdas"
+    },
+    {
+      "type": "std::stringstream&",
+      "name": "ss_connections"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "std::stringstream",
+      "name": "ss"
+    }
+  ],
+  "instructions": [
+    { "op": "ss << ss_includes.str() << std::endl << \"void main()\" << std::endl << \"{\" << std::endl << ss_datas.str() << std::endl << ss_outputs.str() << std::endl << ss_lambdas.str() << std::endl << ss_connections.str() << std::endl << \"return;\" << std::endl << \"}\" << std::endl;" }
+  ]
+}

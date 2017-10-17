@@ -1,0 +1,25 @@
+{
+  "dependancies": [
+    { "l": "json_util.h" },
+    { "l": "jsoncpp\\json\\json.h" },
+    { "c": "sstream" }
+  ],
+  "inputs": [
+    {
+      "type": "Json::Value",
+      "name": "data_list"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "std::stringstream",
+      "name": "ss"
+    }
+  ],
+  "instructions": [
+    { "op": "ss << \"//DATAS\" << std::endl;" },
+    { "op": "for each (Json::Value data in data_list)" },
+    { "op": "ss << data[\"type\"].asString() << \" \" << data[\"name\"].asString() << \" = \" << data[\"data\"].asString() << \";\" << std::endl;" },
+    { "op": "ss << std::endl;" }
+  ]
+}

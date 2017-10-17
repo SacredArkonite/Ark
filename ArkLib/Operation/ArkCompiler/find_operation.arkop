@@ -1,0 +1,28 @@
+{
+  "dependancies": [
+    { "l": "json_util.h" },
+    { "l": "jsoncpp\\json\\json.h" },
+    { "c": "string" }
+  ],
+  "inputs": [
+    {
+      "type": "Json::Value",
+      "name": "operation_list"
+    },
+    {
+      "type": "std::string",
+      "name": "block_name"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "std::string",
+      "name": "ops"
+    }
+  ],
+  "instructions": [
+    { "op": "for each (Json::Value op in operation_list)" },
+    { "op": "if (op[\"name\"].asString() == block_name)" },
+    { "op": "ops = op[\"operation\"].asString();" }
+  ]
+}

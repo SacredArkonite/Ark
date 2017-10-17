@@ -1,0 +1,39 @@
+{
+  "dependancies": [
+    { "l": "json_util.h" },
+    { "l": "jsoncpp\\json\\json.h" },
+    { "c": "string" }
+  ],
+  "inputs": [
+    {
+      "type": "std::string",
+      "name": "filename"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "Json::Value",
+      "name": "data_list"
+    },
+    {
+      "type": "Json::Value",
+      "name": "operation_list"
+    },
+    {
+      "type": "Json::Value",
+      "name": "connection_list"
+    },
+    {
+      "type": "std::string",
+      "name": "output_filename"
+    }
+  ],
+  "instructions": [
+    { "op": "Json::Value root;" },
+    { "op": "interpret(filename, root);" },
+    { "op": "data_list = root[\"datas\"];" },
+    { "op": "operation_list = root[\"operations\"];" },
+    { "op": "connection_list = root[\"connections\"];" },
+    { "op": "output_filename = root[\"schema\"].asString();" }
+  ]
+}

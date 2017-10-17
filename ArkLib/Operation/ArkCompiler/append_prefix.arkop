@@ -1,0 +1,40 @@
+{
+  "dependancies": [
+    { "c": "string" },
+    { "c": "regex" }
+  ],
+  "inputs": [
+    {
+      "type": "std::string",
+      "name": "text"
+    },
+    {
+      "type": "std::vector<std::string>",
+      "name": "find"
+    },
+    {
+      "type": "std::string",
+      "name": "prefix"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "std::string",
+      "name": "clean_text"
+    }
+  ],
+  "instructions": [
+    { "op": "std::string regex_str;" },
+    { "op": "for(auto it : find)" },
+    { "op": "{" },
+    { "op": "regex_str += \"\\\\b\";" },
+    { "op": "regex_str += it;" },
+    { "op": "regex_str += \"\\\\b\";" },
+    { "op": "regex_str += \"|\";" },
+    { "op": "}" },
+    { "op": "regex_str.pop_back();" },
+    { "op": "std::regex r(regex_str);" },
+    { "op": "" },
+    { "op": "return std::regex_replace(text, r, prefix + \"_$&\");" }
+  ]
+}

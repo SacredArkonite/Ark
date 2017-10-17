@@ -1,0 +1,36 @@
+{
+  "dependancies": [
+    { "l": "json_util.h" },
+    { "l": "jsoncpp\\json\\json.h" },
+    { "c": "sstream" }
+  ],
+  "inputs": [
+    {
+      "type": "Json::Value",
+      "name": "operation_list"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "std::stringstream",
+      "name": "ss"
+    }
+  ],
+  "instructions": [
+    { "op": "ss << \"//CREATE VARIABLES ON STACK FOR EACH OUTPUTS\" << std::endl;" },
+    { "op": "for each (Json::Value node in operation_list)" },
+    { "op": "{" },
+    { "op": "//Load arkop file as Json" },
+    { "op": "std::string opfilename = \"../ArkLib/Operation/\" + node[\"operation\"].asString() + \".arkop\";" },
+    { "op": "" },
+    { "op": "Json::Value op_root;" },
+    { "op": "interpret(opfilename, op_root);" },
+    { "op": "" },
+    { "op": "//Create variables" },
+    { "op": "for each (Json::Value output in op_root[\"outputs\"])" },
+    { "op": "ss << output[\"type\"].asString() << \" \" << node[\"name\"].asString() << \"_\" << output[\"name\"].asString() << \";\" << std::endl;" },
+    { "op": "ss << std::endl;" },
+    { "op": "}" },
+    { "op": "ss << std::endl;" }
+  ]
+}

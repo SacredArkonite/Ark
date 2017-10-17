@@ -1,0 +1,40 @@
+{
+  "dependancies": [
+    { "l": "json_util.h" },
+    { "l": "jsoncpp\\json\\json.h" },
+    { "c": "string" },
+    { "c": "algorithm" }
+  ],
+  "inputs": [
+    {
+      "type": "std::string",
+      "name": "arkop_name"
+    },
+    {
+      "type": "std::string",
+      "name": "input_name"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "int",
+      "name": "index"
+    }
+  ],
+  "instructions": [
+    { "op": "std::string opfilename = \"../ArkLib/Operation/\" + arkop_name + \".arkop\";" },
+    { "op": "" },
+    { "op": "Json::Value root;" },
+    { "op": "interpret(opfilename, root);" },
+    { "op": "" },
+    { "op": "int count = 0;" },
+    { "op": "index = -1;" },
+    { "op": "" },
+    { "op": "for each (Json::Value input in root[\"inputs\"])" },
+    { "op": "{" },
+    { "op": "if (input[\"name\"].asString() == input_name)" },
+    { "op": "index = count;" },
+    { "op": "count++;" },
+    { "op": "}" }
+  ]
+}

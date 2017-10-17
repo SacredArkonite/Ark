@@ -1,0 +1,28 @@
+{
+  "dependancies": [
+    { "c": "sstream" }
+  ],
+  "inputs": [
+    {
+      "type": "std::vector<std::string>",
+      "name": "include_list_c"
+    },
+    {
+      "type": "std::vector<std::string>",
+      "name": "include_list_l"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "std::stringstream",
+      "name": "ss"
+    }
+  ],
+  "instructions": [
+    { "op": "ss << \"//INCLUDES\" << std::endl;" },
+    { "op": "for each (std::string i in include_list_c)" },
+    { "op": "ss << \"#include\"<<\"<\"<<i<<\">\" << std::endl;" },
+    { "op": "for each (std::string i in include_list_l)" },
+    { "op": "ss << \"#include\"<< \"\\\"\" <<i<< \"\\\"\" << std::endl;" }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "dependancies": [
+    { "l": "json_util.h" },
+    { "l": "jsoncpp\\json\\json.h" },
+    { "c": "string" }
+  ],
+  "inputs": [
+    {
+      "type": "std::string",
+      "name": "filename"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "Json::Value",
+      "name": "root"
+    }
+  ],
+  "instructions": [
+    { "op": "interpret(filename, root);" }
+  ]
+}

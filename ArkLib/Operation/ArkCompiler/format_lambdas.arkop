@@ -1,0 +1,70 @@
+{
+  "dependancies": [
+    { "l": "json_util.h" },
+    { "l": "jsoncpp\\json\\json.h" },
+    { "c": "sstream" }
+  ],
+  "inputs": [
+    {
+      "type": "Json::Value",
+      "name": "operation_list"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "std::stringstream",
+      "name": "ss"
+    }
+  ],
+  "additionnal": [
+    {
+      "name": "append_prefix"
+    }
+  ],
+  "instructions": [
+    { "op": "ss << \"//OPERATIONS AS LAMBDAS\" << std::endl;" },
+    { "op": "for each (Json::Value node in operation_list)" },
+    { "op": "{" },
+    { "op": "std::string opfilename = \"../ArkLib/Operation/\" + node[\"operation\"].asString() + \".arkop\";" },
+    { "op": "" },
+    { "op": "Json::Value op_root;" },
+    { "op": "interpret(opfilename, op_root);" },
+    { "op": "" },
+    { "op": "std::string optype = node[\"operation\"].asString();" },
+    { "op": "std::string opname = node[\"name\"].asString();" },
+    { "op": "std::vector<std::string> output_names;" },
+    { "op": "" },
+    { "op": "ss << \"//OPERATION \" << optype << std::endl;" },
+    { "op": "//Write outputs" },
+    { "op": "ss << \"auto \" << opname << \" = [ \" ;" },
+    { "op": "for each (Json::Value output in op_root[\"outputs\"])" },
+    { "op": "{" },
+    { "op": "ss << \"&\" << opname << \"_\" << output[\"name\"].asString() << \",\";" },
+    { "op": "output_names.push_back(output[\"name\"].asString());" },
+    { "op": "}" },
+    { "op": "for each (Json::Value output in op_root[\"additionnal\"])" },
+    { "op": "ss << output[\"name\"].asString() << \",\";" },
+    { "op": "ss.seekp(-1, ss.cur);" },
+    { "op": "ss << \" ] (\" ;" },
+    { "op": "" },
+    { "op": "//Write inputs" },
+    { "op": "for each (Json::Value input in op_root[\"inputs\"])" },
+    { "op": "//Cannot put const here, but I want to be sure the input is not modified by the method but still pass it by ref by default" },
+    { "op": "ss << \" \" /* << \"const \"*/ << input[\"type\"].asString() /*<< \"&\"*/ << \" \" << input[\"name\"].asString() << \",\";" },
+    { "op": "" },
+    { "op": "ss.seekp(-1, ss.cur);" },
+    { "op": "ss << \")\" << std::endl << \"{ \" << std::endl;" },
+    { "op": "" },
+    { "op": "//Write operations" },
+    { "op": "//Operations. We need to spaw the outputs name for their new names if necessary." },
+    { "op": "if(output_names.size()>0)" },
+    { "op": "for each (Json::Value op_str in op_root[\"instructions\"])" },
+    { "op": "ss << append_prefix(op_str[\"op\"].asString(), output_names, opname) << std::endl;" },
+    { "op": "else" },
+    { "op": "for each (Json::Value op_str in op_root[\"instructions\"])" },
+    { "op": "ss << op_str[\"op\"].asString() << std::endl;" },
+    { "op": "" },
+    { "op": "ss << \"};\" << std::endl << std::endl;" },
+    { "op": "}" }
+  ]
+}

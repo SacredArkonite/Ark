@@ -1,0 +1,46 @@
+{
+  "dependancies": [
+    { "l": "json_util.h" },
+    { "l": "jsoncpp\\json\\json.h" },
+    { "c": "string" },
+    { "c": "algorithm" },
+    { "c": "functional" }
+  ],
+  "inputs": [
+    {
+      "type": "Json::Value",
+      "name": "operation_list"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "std::vector<std::string>",
+      "name": "list_c"
+    },
+    {
+      "type": "std::vector<std::string>",
+      "name": "list_l"
+    }
+  ],
+  "instructions": [
+    { "op": "for each(Json::Value node in operation_list)" },
+    { "op": "{" },
+    { "op": "//Read arkop file as Json" },
+    { "op": "std::string opfilename = \"../ArkLib/Operation/\" + node[\"operation\"].asString() + \".arkop\";" },
+    { "op": "Json::Value op_root;" },
+    { "op": "interpret(opfilename, op_root);" },
+    { "op": "" },
+    { "op": "for each(Json::Value d in op_root[\"dependancies\"])" },
+    { "op": "{" },
+    { "op": "list_c.push_back(d[\"c\"].asString());" },
+    { "op": "list_l.push_back(d[\"l\"].asString());" },
+    { "op": "}" },
+    { "op": "}" },
+    { "op": "std::sort(list_c.begin(), list_c.end());" },
+    { "op": "list_c.erase(std::unique(list_c.begin(), list_c.end()), list_c.end());" },
+    { "op": "list_c.erase(std::remove_if(list_c.begin(), list_c.end(), std::mem_fun_ref(&std::string::empty)), list_c.end());" },
+    { "op": "std::sort(list_l.begin(), list_l.end());" },
+    { "op": "list_l.erase(std::unique(list_l.begin(), list_l.end()), list_l.end());" },
+    { "op": "list_l.erase(std::remove_if(list_l.begin(), list_l.end(), std::mem_fun_ref(&std::string::empty)), list_l.end());" }
+  ]
+}

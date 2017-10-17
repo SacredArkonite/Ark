@@ -4,11 +4,12 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <functional>
 
 #include "json_util.h"
 #include "jsoncpp\json\json.h"
 
-void getUniqueIncludeList(Json::Value& operation_list, std::vector<std::string>& unique_include_list)
+void getUniqueIncludeList(Json::Value& operation_list, std::vector<std::string>& unique_include_list_c, std::vector<std::string>& unique_include_list_l)
 {
 	for each(Json::Value node in operation_list)
 	{
@@ -19,11 +20,16 @@ void getUniqueIncludeList(Json::Value& operation_list, std::vector<std::string>&
 
 		for each(Json::Value d in op_root["dependancies"])
 		{
-			unique_include_list.push_back(d["d"].asString());
+			unique_include_list_c.push_back(d["c"].asString());
+			unique_include_list_l.push_back(d["l"].asString());
 		}
 	}
-	std::sort(unique_include_list.begin(), unique_include_list.end());
-	unique_include_list.erase(std::unique(unique_include_list.begin(), unique_include_list.end()), unique_include_list.end());
+	std::sort(unique_include_list_c.begin(), unique_include_list_c.end());
+	unique_include_list_c.erase(std::unique(unique_include_list_c.begin(), unique_include_list_c.end()), unique_include_list_c.end());
+	unique_include_list_c.erase(std::remove_if(unique_include_list_c.begin(), unique_include_list_c.end(), std::mem_fun_ref(&std::string::empty)), unique_include_list_c.end());
+	std::sort(unique_include_list_l.begin(), unique_include_list_l.end());
+	unique_include_list_l.erase(std::unique(unique_include_list_l.begin(), unique_include_list_l.end()), unique_include_list_l.end());
+	unique_include_list_l.erase(std::remove_if(unique_include_list_l.begin(), unique_include_list_l.end(), std::mem_fun_ref(&std::string::empty)), unique_include_list_l.end());
 }
 
 int getInputIndex(std::string arkop_name, std::string input_name)
@@ -70,7 +76,7 @@ void precompile(std::string arkfile)
 	Json::Value operation_list = root["operations"];
 	Json::Value connection_list = root["connections"];
 
-	auto findOperation = [&operation_list](std::string opname)
+	auto findOperation = [](std::string opname, Json::Value operation_list)
 	{
 		for each (Json::Value op in operation_list)
 		{
@@ -83,15 +89,22 @@ void precompile(std::string arkfile)
 	std::ifstream filereader;
 
 	//List all dependencies and sort them
-	std::vector<std::string> include_list;
-	getUniqueIncludeList(operation_list, include_list);
+	std::vector<std::string> include_list_c;
+	std::vector<std::string> include_list_l;
+	getUniqueIncludeList(operation_list, include_list_c, include_list_l);
 
-	for each (std::string i in include_list)
+	ss << "//INCLUDES" << std::endl;
+
+	for each (std::string i in include_list_c)
 	{
-		ss << "#include <"<<i<<">" << std::endl;
+		ss << "#include <" << i << ">" << std::endl;
+	}
+	for each (std::string i in include_list_l)
+	{
+		ss << "#include \"" << i << "\"" << std::endl;
 	}
 	
-	ss << std::endl << "void main()" << std::endl << "{" << std::endl;
+	ss << std::endl << std::endl << "void main()" << std::endl << "{" << std::endl;
 
 	ss << "//DATA" << std::endl;
 	for each (Json::Value data in data_list)
@@ -139,6 +152,9 @@ void precompile(std::string arkfile)
 			ss << "&" << opname << "_" << output["name"].asString() << ",";
 			output_names.push_back(output["name"].asString());
 		}
+		for each (Json::Value output in op_root["additionnal"])
+			ss << output["name"].asString() << ",";
+		
 		ss.seekp(-1, ss.cur);
 		ss << "]( ";
 
@@ -168,13 +184,14 @@ void precompile(std::string arkfile)
 
 		ss << "};" << std::endl << std::endl;
 	}
+	ss << std::endl;
 
 	//Do connections
 	ss << "//CREATE THE EXECUTION FLOW" << std::endl;
 	for each (Json::Value block in connection_list)
 	{
 		std::string dest_block = block["block"].asString();
-		std::string dest_arkop = findOperation(dest_block);
+		std::string dest_arkop = findOperation(dest_block, operation_list);
 
 		std::vector<std::string> input_map(block["inputs"].size());
 		//Map with destination port index. This is to allow swap of inputs in an arkop without needing to adjust the arksch.
@@ -206,11 +223,11 @@ void precompile(std::string arkfile)
 	}
 
 
-	ss << "return;" << std::endl << "}" << std::endl;
+	ss << std::endl << "return;" << std::endl << "}" << std::endl;
 
 	//Output the result to a file
 	std::ofstream filewriter("../PrecompilerTest/" + root["schema"].asString() + ".cpp");
 	filewriter << ss.str();
-
+	
 	return;
 }

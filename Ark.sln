@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		LICENSE.md = LICENSE.md
 		MANUAL.md = MANUAL.md
+		precompiler1.arksch = precompiler1.arksch
+		precompiler2.arksch = precompiler2.arksch
 		README.md = README.md
 		test.json = test.json
 	EndProjectSection
@@ -26,6 +28,23 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PrecompilerTest", "PrecompilerTest\PrecompilerTest.vcxproj", "{64C30BCB-D1C6-4770-9660-DFF94D5168DE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "chili_framework\Engine\Engine.vcxproj", "{FFCA512B-49FC-4FC8-8A73-C4F87D322FF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArkCompiler", "ArkCompiler", "{09AEB772-F585-4285-96D2-56FB73CE168A}"
+	ProjectSection(SolutionItems) = preProject
+		ArkLib\Operation\ArkCompiler\append_prefix.arkop = ArkLib\Operation\ArkCompiler\append_prefix.arkop
+		ArkLib\Operation\ArkCompiler\find_operation.arkop = ArkLib\Operation\ArkCompiler\find_operation.arkop
+		ArkLib\Operation\ArkCompiler\format_connections.arkop = ArkLib\Operation\ArkCompiler\format_connections.arkop
+		ArkLib\Operation\ArkCompiler\format_datas.arkop = ArkLib\Operation\ArkCompiler\format_datas.arkop
+		ArkLib\Operation\ArkCompiler\format_includes.arkop = ArkLib\Operation\ArkCompiler\format_includes.arkop
+		ArkLib\Operation\ArkCompiler\format_lambdas.arkop = ArkLib\Operation\ArkCompiler\format_lambdas.arkop
+		ArkLib\Operation\ArkCompiler\format_outputs_init.arkop = ArkLib\Operation\ArkCompiler\format_outputs_init.arkop
+		ArkLib\Operation\ArkCompiler\format_precompiler.arkop = ArkLib\Operation\ArkCompiler\format_precompiler.arkop
+		ArkLib\Operation\ArkCompiler\get_input_index.arkop = ArkLib\Operation\ArkCompiler\get_input_index.arkop
+		ArkLib\Operation\ArkCompiler\get_unique_include_list.arkop = ArkLib\Operation\ArkCompiler\get_unique_include_list.arkop
+		ArkLib\Operation\ArkCompiler\open_json.arkop = ArkLib\Operation\ArkCompiler\open_json.arkop
+		ArkLib\Operation\ArkCompiler\split_arksch.arkop = ArkLib\Operation\ArkCompiler\split_arksch.arkop
+		ArkLib\Operation\ArkCompiler\write_file.arkop = ArkLib\Operation\ArkCompiler\write_file.arkop
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +86,7 @@ Global
 		{8F3059D1-DA98-4C50-B434-B527257B817C} = {311C73D9-A670-4DBA-8710-954E9C96E1EE}
 		{BDC3795B-FC5D-4339-9BF3-27503E4885D6} = {8F3059D1-DA98-4C50-B434-B527257B817C}
 		{9EF867A9-17C0-4C46-A84E-5099CF12A6BD} = {8F3059D1-DA98-4C50-B434-B527257B817C}
+		{09AEB772-F585-4285-96D2-56FB73CE168A} = {9EF867A9-17C0-4C46-A84E-5099CF12A6BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C28E3E43-EBB5-4E26-B425-D3F020B43ECE}

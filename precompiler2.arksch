@@ -1,0 +1,231 @@
+{
+  "schema": "test.arksch",
+  "datas": [
+    {
+      "name": "arksch_filename",
+      "type": "std::string",
+      "data": "\"../precompiler2.arksch\""
+    }
+  ],
+  "operations": [
+    {
+      "operation": "ArkCompiler/append_prefix",
+      "name": "append_prefix",
+      "compile_type": "lambda"
+    },
+    {
+      "operation": "ArkCompiler/get_input_index",
+      "name": "get_input_index",
+      "compile_type": "lambda"
+    },
+    {
+      "operation": "ArkCompiler/find_operation",
+      "name": "find_operation",
+      "compile_type": "lambda"
+    },
+    {
+      "operation": "ArkCompiler/format_connections",
+      "name": "format_connections",
+      "compile_type": "lambda"
+    },
+    {
+      "operation": "ArkCompiler/format_datas",
+      "name": "format_datas",
+      "compile_type": "lambda"
+    },
+    {
+      "operation": "ArkCompiler/format_includes",
+      "name": "format_includes",
+      "compile_type": "lambda"
+    },
+    {
+      "operation": "ArkCompiler/format_lambdas",
+      "name": "format_lambdas",
+      "compile_type": "lambda"
+    },
+    {
+      "operation": "ArkCompiler/format_outputs_init",
+      "name": "format_outputs",
+      "compile_type": "lambda"
+    },
+    {
+      "operation": "ArkCompiler/format_precompiler",
+      "name": "format_precompiler",
+      "compile_type": "lambda"
+    },
+    {
+      "operation": "ArkCompiler/get_unique_include_list",
+      "name": "get_unique_include",
+      "compile_type": "lambda"
+    },
+    {
+      "operation": "ArkCompiler/split_arksch",
+      "name": "split_arksch",
+      "compile_type": "lambda"
+    },
+    {
+      "operation": "ArkCompiler/write_file",
+      "name": "write_file",
+      "compile_type": "lambda"
+    }
+  ],
+  "connections": [
+    {
+      "block": "split_arksch",
+      "inputs": [
+        {
+          "input": "filename",
+          "source": {
+            "block": "arksch_filename",
+            "output": ""
+          }
+        }
+      ]
+    },
+    {
+      "block": "get_unique_include",
+      "inputs": [
+        {
+          "input": "operation_list",
+          "source": {
+            "block": "split_arksch",
+            "output": "operation_list"
+          }
+        }
+      ]
+    },
+    {
+      "block": "format_includes",
+      "inputs": [
+        {
+          "input": "include_list_c",
+          "source": {
+            "block": "get_unique_include",
+            "output": "list_c"
+          }
+        },
+        {
+          "input": "include_list_l",
+          "source": {
+            "block": "get_unique_include",
+            "output": "list_l"
+          }
+        }
+      ]
+    },
+    {
+      "block": "format_datas",
+      "inputs": [
+        {
+          "input": "data_list",
+          "source": {
+            "block": "split_arksch",
+            "output": "data_list"
+          }
+        }
+      ]
+    },
+    {
+      "block": "format_outputs",
+      "inputs": [
+        {
+          "input": "operation_list",
+          "source": {
+            "block": "split_arksch",
+            "output": "operation_list"
+          }
+        }
+      ]
+    },
+    {
+      "block": "format_lambdas",
+      "inputs": [
+        {
+          "input": "operation_list",
+          "source": {
+            "block": "split_arksch",
+            "output": "operation_list"
+          }
+        }
+      ]
+    },
+    {
+      "block": "format_connections",
+      "inputs": [
+        {
+          "input": "connection_list",
+          "source": {
+            "block": "split_arksch",
+            "output": "connection_list"
+          }
+        },
+        {
+          "input": "operation_list",
+          "source": {
+            "block": "split_arksch",
+            "output": "operation_list"
+          }
+        }
+      ]
+    },
+    {
+      "block": "format_precompiler",
+      "inputs": [
+        {
+          "input": "ss_includes",
+          "source": {
+            "block": "format_includes",
+            "output": "ss"
+          }
+        },
+        {
+          "input": "ss_datas",
+          "source": {
+            "block": "format_datas",
+            "output": "ss"
+          }
+        },
+        {
+          "input": "ss_lambdas",
+          "source": {
+            "block": "format_lambdas",
+            "output": "ss"
+          }
+        },
+        {
+          "input": "ss_outputs",
+          "source": {
+            "block": "format_outputs",
+            "output": "ss"
+          }
+        },
+        {
+          "input": "ss_connections",
+          "source": {
+            "block": "format_connections",
+            "output": "ss"
+          }
+        }
+      ]
+    },
+    {
+      "block": "write_file",
+      "inputs": [
+        {
+          "input": "filename",
+          "source": {
+            "block": "split_arksch",
+            "output": "output_filename"
+          }
+        },
+        {
+          "input": "data",
+          "source": {
+            "block": "format_precompiler",
+            "output": "ss"
+          }
+        }
+      ]
+    }
+  ]
+}
