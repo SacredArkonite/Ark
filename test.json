@@ -1,158 +1,58 @@
 {
-  "schema":  "test.arksch",
+  "schema": "test.arksch",
   "datas": [
     {
       "name": "const1",
-      "type": "constant",
-      "data": 2,
-      "inputs": [
-      ],
-      "outputs": [
-        {
-          "name": "out",
-          "type": "int"
-        }
-      ]
+      "type": "std::string",
+      "data": "\"Hello World!\""
     },
     {
       "name": "const2",
-      "type": "constant",
-      "data": 3,
-      "inputs": [
-      ],
-      "outputs": [
-        {
-          "name": "out",
-          "type": "int"
-        }
-      ]
-    },
-    {
-      "name": "const3",
-      "type": "constant",
-      "data": 4,
-      "inputs": [
-      ],
-      "outputs": [
-        {
-          "name": "out",
-          "type": "int"
-        }
-      ]
+      "type": "char",
+      "data": "'l'"
     }
   ],
   "operations": [
     {
-      "name": "mul1",
-      "type": "multiplier",
-      "inputs": [
-        {
-          "name": "in1",
-          "type": "int"
-        },
-        {
-          "name": "in2",
-          "type": "int"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "out",
-          "type": "int"
-        }
-      ]
+      "operation": "print_and_wait",
+      "name": "prnt",
+      "compile_type": "lambda"
     },
     {
-      "name": "add1",
-      "type": "adder",
-      "inputs": [
-        {
-          "name": "in1",
-          "type": "int"
-        },
-        {
-          "name": "in2",
-          "type": "int"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "out",
-          "type": "int"
-        }
-      ]
-    },
-    {
-      "name": "prnt_wait",
-      "type": "print_and_wait",
-      "inputs": [
-        {
-          "name": "in",
-          "type": "int"
-        }
-      ],
-      "outputs": [
-      ]
+      "operation": "remove_char",
+      "name": "rm",
+      "compile_type": "lambda"
     }
   ],
   "connections": [
     {
-      "source": {
-        "block": "const2",
-        "port": "out"
-      },
-      "destinations": [
+      "block": "rm",
+      "inputs": [
         {
-          "block": "mul1",
-          "port": "in1"
+          "input": "text",
+          "source": {
+            "block": "const1",
+            "output": ""
+          }
+        },
+        {
+          "input": "character",
+          "source": {
+            "block": "const2",
+            "output": ""
+          }
         }
       ]
     },
     {
-      "source": {
-        "block": "const3",
-        "port": "out"
-      },
-      "destinations": [
+      "block": "prnt",
+      "inputs": [
         {
-          "block": "mul1",
-          "port": "in2"
-        }
-      ]
-    },
-    {
-      "source": {
-        "block": "const1",
-        "port": "out"
-      },
-      "destinations": [
-        {
-          "block": "add1",
-          "port": "in1"
-        }
-      ]
-    },
-    {
-      "source": {
-        "block": "mul1",
-        "port": "out"
-      },
-      "destinations": [
-        {
-          "block": "add1",
-          "port": "in2"
-        }
-      ]
-    },
-    {
-      "source": {
-        "block": "add1",
-        "port": "out"
-      },
-      "destinations": [
-        {
-          "block": "prnt_wait",
-          "port": "in"
+          "input": "text",
+          "source": {
+            "block": "rm",
+            "output": "new_text"
+          }
         }
       ]
     }

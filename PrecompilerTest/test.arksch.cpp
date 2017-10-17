@@ -1,56 +1,37 @@
+#include <algorithm>
 #include <iostream>
+#include <string>
+
 void main()
 {
 //DATA
-int const1_out = 2;
-int const2_out = 3;
-int const3_out = 4;
-//OPERATIONS
+std::string const1 = "Hello World!";
+char const2 = 'l';
 
-//OPERAION: mul1
-//TYPE: multiplier
-//OUTPUTS
-int mul1_out;
+//VARIABLES ON STACK FOR EACH OUTPUTS
+
+
+std::string rm_new_text;
+
+//OPERATIONS AS LAMBDAS
+
+//OPERATION print_and_wait
+auto prnt = [](  std::string text)
 {
-//INPUTS
-int in1;
-int in2;
-//SET INPUTS
-in1 = const2_out;
-in2 = const3_out;
-//OPERATION
-mul1_out=in1*in2;;
-}
+std::cout<<text<<std::endl;
+char c;
+std::cin>>c;
+};
 
-//OPERAION: add1
-//TYPE: adder
-//OUTPUTS
-int add1_out;
+//OPERATION remove_char
+auto rm = [ &rm_new_text](  std::string text, char character)
 {
-//INPUTS
-int in1;
-int in2;
-//SET INPUTS
-in1 = const1_out;
-in2 = mul1_out;
-//OPERATION
-add1_out=in1+in2;;
-}
+rm_new_text = text;
+rm_new_text.erase (std::remove(rm_new_text.begin(), rm_new_text.end(), character), rm_new_text.end());
+};
 
-//OPERAION: prnt_wait
-//TYPE: print_and_wait
-//OUTPUTS
-{
-//INPUTS
-int in;
-//SET INPUTS
-in = add1_out;
-//OPERATION
-std::cout<<"Value:"<<in<<std::endl;
-char
-t;
-std::cin>>t;
-}
-
+//CREATE THE EXECUTION FLOW
+rm(  const1, const2);
+prnt(  rm_new_text);
 return;
 }

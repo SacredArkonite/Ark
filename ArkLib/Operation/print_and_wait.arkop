@@ -1,3 +1,13 @@
-std::cout<<"Value:"<<in<<std::endl;
-char t;
-std::cin>>t;
+{
+"dependancies":  [
+{"d":"iostream"},
+{"d":"string"}
+],
+"inputs" : [{"type":"std::string","name":"text"}],
+"outputs" : [],
+"instructions" : [
+	{"op": "std::cout<<text<<std::endl;"},
+	{"op": "char c;" },
+	{"op": "std::cin>>c;" }
+]
+}

@@ -16,15 +16,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ArkLib", "ArkLib", "{8F3059D1-DA98-4C50-B434-B527257B817C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{BDC3795B-FC5D-4339-9BF3-27503E4885D6}"
-	ProjectSection(SolutionItems) = preProject
-		constant.arkdata = constant.arkdata
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Operation", "Operation", "{9EF867A9-17C0-4C46-A84E-5099CF12A6BD}"
 	ProjectSection(SolutionItems) = preProject
-		adder.arkop = adder.arkop
-		multiplier.arkop = multiplier.arkop
-		print_and_wait.arkop = print_and_wait.arkop
+		ArkLib\Operation\print_and_wait.arkop = ArkLib\Operation\print_and_wait.arkop
+		ArkLib\Operation\remove_char.arkop = ArkLib\Operation\remove_char.arkop
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PrecompilerTest", "PrecompilerTest\PrecompilerTest.vcxproj", "{64C30BCB-D1C6-4770-9660-DFF94D5168DE}"

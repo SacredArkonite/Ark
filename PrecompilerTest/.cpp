@@ -1,0 +1,10 @@
+
+void main()
+{
+//DATA
+//VARIABLES ON STACK FOR EACH OUTPUTS
+
+//OPERATIONS AS LAMBDAS
+
+return;
+}

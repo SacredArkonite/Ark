@@ -1,0 +1,13 @@
+{
+"dependancies":  [
+{"d":"iostream"},
+{ "d":"string" },
+{ "d":"algorithm" }
+],
+"inputs" : [{"type":"std::string","name":"text"}, { "type":"char","name" : "character" }],
+"outputs" : [{"type":"std::string", "name" : "new_text"}],
+"instructions" : [
+{"op": "new_text = text;"},
+{"op": "new_text.erase (std::remove(new_text.begin(), new_text.end(), character), new_text.end());"}
+]
+}

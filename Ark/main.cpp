@@ -5,6 +5,8 @@
 void main()
 {
 	precompile("../test.json");
+	char t;
+	std::cin >> t;
 
 	return;
 }
